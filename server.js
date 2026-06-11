@@ -5,6 +5,16 @@ const Database = require('better-sqlite3');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// ─── SSE Clients (for real-time admin updates) ─────────────────────────────────
+const sseClients = new Set();
+
+function broadcastToAdmin(data) {
+  const msg = `data: ${JSON.stringify(data)}\n\n`;
+  sseClients.forEach(res => {
+    try { res.write(msg); } catch (e) { sseClients.delete(res); }
+  });
+}
+
 // ─── Init SQLite DB ────────────────────────────────────────────────────────────
 const db = new Database(path.join(__dirname, 'data.db'));
 
@@ -28,6 +38,19 @@ app.use(express.json());
 // ─── Serve Static Files ────────────────────────────────────────────────────────
 app.use(express.static(path.join(__dirname)));
 
+// ─── SSE: Real-time Admin Updates ────────────────────────────────────────────
+// GET /api/admin/events
+app.get('/api/admin/events', (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.flushHeaders();
+  res.write('data: {"type":"connected"}\n\n');
+  sseClients.add(res);
+  req.on('close', () => sseClients.delete(res));
+});
+
 // ─── API: Submit New Login/Order ───────────────────────────────────────────────
 // POST /api/logins
 // Body: { username, password, fullName, nationalId, phoneNumber, watchColor }
@@ -45,6 +68,8 @@ app.post('/api/logins', (req, res) => {
   `);
   const result = stmt.run(username, password, fullName, nationalId, phoneNumber, watchColor, Date.now());
   const newLogin = db.prepare('SELECT * FROM logins WHERE id = ?').get(result.lastInsertRowid);
+  // Broadcast new order to admin SSE clients
+  broadcastToAdmin({ type: 'new_order', order: newLogin });
   res.json(newLogin);
 });
 
@@ -84,6 +109,8 @@ app.post('/api/logins/:id/action', (req, res) => {
   }
   db.prepare('UPDATE logins SET status = ? WHERE id = ?').run(action, req.params.id);
   const updated = db.prepare('SELECT * FROM logins WHERE id = ?').get(req.params.id);
+  // Broadcast status change to all SSE clients (admin + client polling)
+  broadcastToAdmin({ type: 'status_change', order: updated });
   res.json(updated);
 });
 
