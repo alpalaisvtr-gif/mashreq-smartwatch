@@ -9,8 +9,8 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-      background: #0a0a0a;
-      color: #fff;
+      background: #f5f5f5;
+      color: #1a1a1a;
       min-height: 100vh;
       direction: rtl;
     }
@@ -21,28 +21,29 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a0a00 50%, #0a0a0a 100%);
+      background: linear-gradient(135deg, #fff8f0 0%, #ffe8d0 50%, #fff8f0 100%);
     }
 
     .login-box {
-      background: #1a1a1a;
+      background: #ffffff;
       border: 1px solid #f97316;
       border-radius: 16px;
       padding: 40px;
       width: 100%;
       max-width: 400px;
       text-align: center;
+      box-shadow: 0 8px 32px rgba(249,115,22,0.12);
     }
 
     .login-box img { width: 120px; margin-bottom: 20px; }
     .login-box h2 { color: #f97316; font-size: 1.4rem; margin-bottom: 8px; }
-    .login-box p { color: #888; font-size: 0.85rem; margin-bottom: 28px; }
+    .login-box p { color: #666; font-size: 0.85rem; margin-bottom: 28px; }
 
     .form-group { margin-bottom: 16px; text-align: right; }
-    .form-group label { display: block; color: #ccc; font-size: 0.85rem; margin-bottom: 6px; }
+    .form-group label { display: block; color: #444; font-size: 0.85rem; margin-bottom: 6px; }
     .form-group input {
-      width: 100%; background: #2a2a2a; border: 1px solid #444;
-      border-radius: 8px; padding: 12px 14px; color: #fff; font-size: 0.95rem;
+      width: 100%; background: #f9f9f9; border: 1px solid #ddd;
+      border-radius: 8px; padding: 12px 14px; color: #1a1a1a; font-size: 0.95rem;
       outline: none; transition: border-color 0.2s; direction: ltr; text-align: left;
     }
     .form-group input:focus { border-color: #f97316; }
@@ -61,13 +62,14 @@
     #admin-page { display: none; }
 
     .header {
-      background: #111; border-bottom: 2px solid #f97316;
+      background: #ffffff; border-bottom: 2px solid #f97316;
       padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
     .header-right { display: flex; align-items: center; gap: 12px; }
     .header img { width: 80px; }
     .header h1 { font-size: 1.1rem; color: #f97316; }
-    .header p { font-size: 0.75rem; color: #888; }
+    .header p { font-size: 0.75rem; color: #666; }
 
     .btn-logout {
       background: transparent; border: 1px solid #f97316; color: #f97316;
@@ -86,11 +88,12 @@
     @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
 
     .stat-card {
-      background: #1a1a1a; border-radius: 12px; padding: 20px;
-      text-align: center; border: 1px solid #2a2a2a;
+      background: #ffffff; border-radius: 12px; padding: 20px;
+      text-align: center; border: 1px solid #e5e7eb;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
     .stat-card .stat-num { font-size: 2rem; font-weight: bold; color: #f97316; }
-    .stat-card .stat-label { font-size: 0.8rem; color: #888; margin-top: 4px; }
+    .stat-card .stat-label { font-size: 0.8rem; color: #666; margin-top: 4px; }
     .stat-card.pending .stat-num { color: #f59e0b; }
     .stat-card.approved .stat-num { color: #22c55e; }
     .stat-card.rejected .stat-num { color: #ef4444; }
@@ -101,34 +104,35 @@
 
     .filter-tabs { display: flex; gap: 8px; }
     .filter-tab {
-      background: #1a1a1a; border: 1px solid #333; color: #888;
+      background: #ffffff; border: 1px solid #ddd; color: #666;
       padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s;
     }
-    .filter-tab.active { background: #f97316; border-color: #f97316; color: #000; font-weight: bold; }
+    .filter-tab.active { background: #f97316; border-color: #f97316; color: #fff; font-weight: bold; }
 
     .table-container {
-      background: #1a1a1a; border-radius: 12px; overflow: hidden;
-      border: 1px solid #2a2a2a; overflow-x: auto;
+      background: #ffffff; border-radius: 12px; overflow: hidden;
+      border: 1px solid #e5e7eb; overflow-x: auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
     table { width: 100%; border-collapse: collapse; min-width: 900px; }
-    thead { background: #111; }
+    thead { background: #f9fafb; }
     thead th {
       padding: 14px 16px; text-align: right; font-size: 0.8rem;
-      color: #888; font-weight: 600; border-bottom: 1px solid #2a2a2a;
+      color: #555; font-weight: 600; border-bottom: 1px solid #e5e7eb;
     }
-    tbody tr { border-bottom: 1px solid #222; transition: background 0.15s; }
-    tbody tr:hover { background: #222; }
+    tbody tr { border-bottom: 1px solid #f3f4f6; transition: background 0.15s; }
+    tbody tr:hover { background: #fef9f5; }
     tbody tr:last-child { border-bottom: none; }
-    tbody td { padding: 12px 16px; font-size: 0.85rem; color: #ddd; vertical-align: middle; }
+    tbody td { padding: 12px 16px; font-size: 0.85rem; color: #333; vertical-align: middle; }
 
     .status-badge {
       display: inline-block; padding: 4px 12px; border-radius: 20px;
       font-size: 0.75rem; font-weight: bold;
     }
-    .status-PENDING { background: #451a03; color: #f59e0b; }
-    .status-APPROVED { background: #052e16; color: #22c55e; }
-    .status-REJECTED { background: #450a0a; color: #ef4444; }
+    .status-PENDING { background: #fef3c7; color: #d97706; }
+    .status-APPROVED { background: #dcfce7; color: #16a34a; }
+    .status-REJECTED { background: #fee2e2; color: #dc2626; }
 
     .action-btns { display: flex; gap: 6px; }
     .btn-approve, .btn-reject, .btn-delete {
@@ -137,13 +141,13 @@
     }
     .btn-approve { background: #22c55e; color: #000; }
     .btn-reject { background: #ef4444; color: #fff; }
-    .btn-delete { background: #333; color: #888; }
+    .btn-delete { background: #f3f4f6; color: #666; }
     .btn-approve:hover, .btn-reject:hover, .btn-delete:hover { opacity: 0.8; }
 
-    .empty-state { text-align: center; padding: 60px 20px; color: #555; }
+    .empty-state { text-align: center; padding: 60px 20px; color: #999; }
     .empty-state p { font-size: 0.9rem; margin-top: 8px; }
 
-    .loading { text-align: center; padding: 40px; color: #888; }
+    .loading { text-align: center; padding: 40px; color: #999; }
 
     /* Modal */
     .modal-overlay {
@@ -152,17 +156,18 @@
     }
     .modal-overlay.open { display: flex; }
     .modal {
-      background: #1a1a1a; border: 1px solid #f97316; border-radius: 16px;
+      background: #ffffff; border: 1px solid #f97316; border-radius: 16px;
       padding: 28px; width: 90%; max-width: 480px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     }
     .modal h3 { color: #f97316; margin-bottom: 20px; font-size: 1.1rem; }
     .modal-row {
       display: flex; justify-content: space-between; padding: 10px 0;
-      border-bottom: 1px solid #2a2a2a; font-size: 0.9rem;
+      border-bottom: 1px solid #f3f4f6; font-size: 0.9rem;
     }
     .modal-row:last-of-type { border-bottom: none; }
-    .modal-row .label { color: #888; }
-    .modal-row .value { color: #fff; font-weight: 500; }
+    .modal-row .label { color: #666; }
+    .modal-row .value { color: #1a1a1a; font-weight: 500; }
     .modal-close {
       width: 100%; background: #f97316; color: #000; border: none;
       border-radius: 8px; padding: 12px; font-size: 0.95rem;
@@ -170,7 +175,7 @@
     }
 
     .refresh-btn {
-      background: #1a1a1a; border: 1px solid #333; color: #888;
+      background: #ffffff; border: 1px solid #ddd; color: #666;
       padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;
       transition: all 0.2s; margin-right: 8px;
     }
